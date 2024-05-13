@@ -44,10 +44,10 @@ class ReportsTableViewController: UITableViewController {
             
             var newReport = Report()
             newReport.reportText = textField.text
-            newReport.date = String(Date().timeIntervalSince1970)
+            newReport.time = String(Date().timeIntervalSince1970)
             newReport.reportItemID = self.currentItemID
             
-            if let reportDate = newReport.date, let txt = newReport.reportText {
+            if let reportTime = newReport.time, let txt = newReport.reportText {
                 self.addReport(newReport)
             }
 
@@ -70,12 +70,19 @@ class ReportsTableViewController: UITableViewController {
     
     func addReport(_ report: Report){
         
+        var currentDate: String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+            let formattedDate = dateFormatter.string(from: Date())
+            return formattedDate
+        }
         
-        if let text = report.reportText, let date = report.date, let id = report.reportItemID, let user = Auth.auth().currentUser?.email {
+        if let text = report.reportText, let time = report.time, let id = report.reportItemID, let user = Auth.auth().currentUser?.email {
             
             self.db.collection("reports@\(user)").addDocument(data: [
                 "description": text,
-                "date": date,
+                "date": currentDate,
+                "time": time,
                 "itemID": id
             ]) {(error) in
                 if let e = error {
@@ -104,11 +111,12 @@ class ReportsTableViewController: UITableViewController {
                             for doc in snapshotDocuments {
                                 let data = doc.data()
                                 if let date = data["date"] as? String,
+                                   let time = data["time"] as? String,
                                    let description = data["description"] as? String,
                                    let id = data["itemID"] as? String
                                   
                                 {
-                                    let loadedReport = Report(date: date, reportText: description, reportItemID: id)
+                                    let loadedReport = Report( date: date, time: time, reportText: description, reportItemID: id)
                                     print(">>>>>>REPORT LOADED: \(loadedReport)")
                                     self.reportsList.append(loadedReport)
                                     
@@ -140,7 +148,7 @@ class ReportsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reportsCell", for: indexPath)
         
         cell.textLabel?.text = reportsList[indexPath.row].reportText
-        print(reportsList[indexPath.row].date!)
+        cell.detailTextLabel?.text = "Last update: \(reportsList[indexPath.row].date!)"
 
         return cell
     }
