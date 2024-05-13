@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "27D3CC1C-FDF5-485C-9F2B-9357CF7C0917"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EquipManage/Controller/ItemsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "ItemsViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - 9d4e0cf381a55545"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.selectedCategory.getter : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "103">
+               </Location>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - 55d45879522fa551"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.selectedCategory.setter : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - 198f05f86f4cb946"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.selectedCategory.modify : Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - 333b651b9946da7b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.selectedCategory.modify : Swift.Optional&lt;Swift.String&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "17">
+               </Location>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - ddfae255d78d30c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.init(style: __C.UITableViewStyle) -&gt; EquipManage.ItemsViewController"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - ec6cd0c8b86aacc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; EquipManage.ItemsViewController"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "169">
+               </Location>
+               <Location
+                  uuid = "BD0D3609-7F1C-41DE-8A15-E4582312A746 - aec9f6536d7ac3d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EquipManage.ItemsViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;EquipManage.ItemsViewController&gt;"
+                  moduleName = "EquipManage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devcsuzarte/Desktop/Projects_iOS/EquipManage/EquipManage/Controller/ItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "126">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
