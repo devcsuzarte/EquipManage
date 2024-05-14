@@ -54,7 +54,8 @@ class ItemsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemsCell", for: indexPath)
         
         cell.textLabel?.text = items[indexPath.row].title!
-        cell.detailTextLabel?.text = items[indexPath.row].onwer!
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
+        cell.detailTextLabel?.text = "\(items[indexPath.row].onwer!) - \(items[indexPath.row].depatarment!)"
         
         return cell
     }

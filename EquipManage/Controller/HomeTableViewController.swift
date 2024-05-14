@@ -128,6 +128,11 @@ class HomeTableViewController: UITableViewController {
         
         cell.textLabel?.text = cat[indexPath.row].title!
         cell.detailTextLabel?.text = String(cat[indexPath.row].counter!)
+        cell.detailTextLabel?.backgroundColor = UIColor.blue
+        cell.detailTextLabel?.textColor = UIColor.white
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 15.0)
+        cell.detailTextLabel?.layer.masksToBounds = true
+        cell.detailTextLabel?.layer.cornerRadius = 5
 
         return cell
     }
