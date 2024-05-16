@@ -24,20 +24,18 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
-        print("\(selectedCategory!) - - - \(categoryID!)")
         tableView.dataSource = self
         
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
         loadItems()
     }
     
     
     @IBAction func addItemButtonPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "goToAddItem", sender: self)
+        performSegue(withIdentifier: K.addSegue, sender: self)
     }
     
     // MARK: - Table view data source
@@ -52,7 +50,7 @@ class ItemsViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemsCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.itemsCell, for: indexPath)
         
         cell.textLabel?.text = items[indexPath.row].title!
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
@@ -65,11 +63,11 @@ class ItemsViewController: UITableViewController {
      
         selectedIndex = indexPath.row
                 
-        performSegue(withIdentifier: "goToReports", sender: self)
+        performSegue(withIdentifier: K.reportsSegue, sender: self)
     }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if segue.identifier == "goToReports" {
+      if segue.identifier == K.reportsSegue {
             let destinationVC = segue.destination as! ReportsTableViewController
             
             if let i =  selectedIndex {
@@ -85,8 +83,8 @@ class ItemsViewController: UITableViewController {
                 
         if let user = Auth.auth().currentUser?.email, let categoryName = selectedCategory{
             
-            db.collection("items@\(user)")
-                .whereField("category", isEqualTo: categoryName)
+            db.collection(K.FStore.itemsCollection + user)
+                .whereField(K.FStore.itemsCategory, isEqualTo: categoryName)
                 .addSnapshotListener {querySnapshot, error in
                     
                     if let e = error {
@@ -96,11 +94,11 @@ class ItemsViewController: UITableViewController {
                         if let snapshotDocuments = querySnapshot?.documents {
                             for doc in snapshotDocuments {
                                 let data = doc.data()
-                                if let category = data["category"] as? String,
-                                   let title = data["title"] as? String,
-                                   let owner = data["owner"] as? String,
-                                   let department = data["department"] as? String,
-                                   let itemID = data["id"] as? Int
+                                if let category = data[K.FStore.itemsCategory] as? String,
+                                   let title = data[K.FStore.itemsTitle] as? String,
+                                   let owner = data[K.FStore.itemsOwner] as? String,
+                                   let department = data[K.FStore.itemsDepartment] as? String,
+                                   let itemID = data[K.FStore.itemsId] as? Int
                                 {
                                     let loadedItem = Item(category: category, title: title, id: itemID, docID: doc.documentID, onwer: owner, depatarment: department)
                                     print("------ITEM LOADED: \(loadedItem)")

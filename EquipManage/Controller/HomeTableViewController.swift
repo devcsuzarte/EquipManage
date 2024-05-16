@@ -27,7 +27,6 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("heei I appear")
         loadCategorys()
     }
     
@@ -40,8 +39,8 @@ class HomeTableViewController: UITableViewController {
         if let user = Auth.auth().currentUser?.email{
   
             
-            db.collection("categorys@\(user)")
-                .order(by: "titleField")
+            db.collection(K.FStore.categorysCollection + user)
+                .order(by: K.FStore.titleField)
                 .getDocuments
             {querySnapshot, error in
                     
@@ -51,7 +50,7 @@ class HomeTableViewController: UITableViewController {
                         if let snapshotDocuments = querySnapshot?.documents {
                             for doc in snapshotDocuments {
                                 let data = doc.data()
-                                if let categoryName = data["titleField"] as? String, let count = data["countField"] as? Int {
+                                if let categoryName = data[K.FStore.titleField] as? String, let count = data[K.FStore.countField] as? Int {
                                     let loadedCat = Category(title: categoryName, counter: count, categoryID: doc.documentID)
                                     self.cat.append(loadedCat)
                                     
@@ -84,9 +83,9 @@ class HomeTableViewController: UITableViewController {
             
             if let title = newItem.title, let count = newItem.counter, let user = Auth.auth().currentUser?.email {
                 
-                self.db.collection("categorys@\(user)").addDocument(data: [
-                    "titleField": title,
-                    "countField": count
+                self.db.collection(K.FStore.categorysCollection + user).addDocument(data: [
+                    K.FStore.titleField: title,
+                    K.FStore.countField: count
                 ]) {(error) in
                     if let e = error {
                         print("Erro to send data: \(e)")
@@ -127,7 +126,7 @@ class HomeTableViewController: UITableViewController {
 
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.categotyCell, for: indexPath)
         
         cell.textLabel?.text = cat[indexPath.row].title!
         cell.detailTextLabel?.text = String(cat[indexPath.row].counter!)
@@ -147,7 +146,7 @@ class HomeTableViewController: UITableViewController {
         sendCategoryID = cat[indexPath.row].categoryID!
         
         
-        performSegue(withIdentifier: "goToItems", sender: self)
+        performSegue(withIdentifier: K.itemsSegue, sender: self)
         
         
     }
