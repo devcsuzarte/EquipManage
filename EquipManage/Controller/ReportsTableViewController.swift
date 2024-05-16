@@ -148,7 +148,6 @@ class ReportsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reportsCell", for: indexPath)
         
         cell.textLabel?.text = reportsList[indexPath.row].reportText
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
         cell.detailTextLabel?.text = "Last update: \(reportsList[indexPath.row].date!)"
 
         return cell

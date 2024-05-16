@@ -26,6 +26,7 @@ class AddItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
        // print(">>>>>>ITEMS COUNT: \(itemsCounter!)")
             }
     

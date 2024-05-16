@@ -23,6 +23,7 @@ class ItemsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
         print("\(selectedCategory!) - - - \(categoryID!)")
         tableView.dataSource = self
         
