@@ -27,7 +27,7 @@ class AddItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
-       // print(">>>>>>ITEMS COUNT: \(itemsCounter!)")
+       print(" fallllla \(currentCategory!)")
             }
     
     @IBAction func addItemButtonPressed(_ sender: UIButton) {
@@ -61,10 +61,9 @@ class AddItemViewController: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 }
             }
-            
-            
+        } else {
+            print("errorrrrr")
         }
-        
     }
     
     

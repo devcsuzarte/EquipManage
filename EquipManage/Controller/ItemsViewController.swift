@@ -67,6 +67,19 @@ class ItemsViewController: UITableViewController {
     }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      
+      
+      if segue.identifier == K.addSegue {
+          let destinationVC = segue.destination as! AddItemViewController
+          
+          if let categoryToItem = selectedCategory, let id = categoryID {
+              destinationVC.currentCategory = categoryToItem
+              destinationVC.currentCategoryID = id
+              destinationVC.itemsCounter = items.count
+          }
+          
+      }
+      
       if segue.identifier == K.reportsSegue {
             let destinationVC = segue.destination as! ReportsTableViewController
             
