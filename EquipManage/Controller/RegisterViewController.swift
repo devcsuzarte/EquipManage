@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
                 if let e = error {
                     print(e.localizedDescription)
                 } else {
-                    self.performSegue(withIdentifier: "goToHome", sender: LoginViewController.self)
+                    self.performSegue(withIdentifier: K.homeSegue, sender: LoginViewController.self)
                 }
             }
         }

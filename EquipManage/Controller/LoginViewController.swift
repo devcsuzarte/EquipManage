@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
                 if let e = error {
                     print(e)
                 } else {
-                    self!.performSegue(withIdentifier: "loginToHome", sender: self)
+                    self!.performSegue(withIdentifier: K.homeSegue, sender: self)
                 }
             }
         }

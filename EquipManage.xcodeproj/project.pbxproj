@@ -26,6 +26,7 @@
 		FADBA9D42BDC10CE001A963D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBA9D32BDC10CE001A963D /* Category.swift */; };
 		FADBA9D62BDC10E0001A963D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBA9D52BDC10E0001A963D /* Item.swift */; };
 		FAEB85012BDEFE95001244F2 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB85002BDEFE95001244F2 /* ItemsViewController.swift */; };
+		FAFA36142BFB407C003127BD /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA36132BFB407C003127BD /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		FADBA9D32BDC10CE001A963D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		FADBA9D52BDC10E0001A963D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FAEB85002BDEFE95001244F2 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
+		FAFA36132BFB407C003127BD /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				FADBA9D32BDC10CE001A963D /* Category.swift */,
+				FAFA36132BFB407C003127BD /* DataModel.swift */,
 				FADBA9D52BDC10E0001A963D /* Item.swift */,
 				FA436B732BEA8E5C008CF7CD /* Report.swift */,
 			);
@@ -214,6 +217,7 @@
 				FADBA9D42BDC10CE001A963D /* Category.swift in Sources */,
 				FADBA9BC2BDC0F15001A963D /* AppDelegate.swift in Sources */,
 				FAEB85012BDEFE95001244F2 /* ItemsViewController.swift in Sources */,
+				FAFA36142BFB407C003127BD /* DataModel.swift in Sources */,
 				FAB516792BE063640053FDD9 /* LoginViewController.swift in Sources */,
 				FA3DD46A2BE03BB400ECA277 /* AddItemViewController.swift in Sources */,
 				FADBA9D62BDC10E0001A963D /* Item.swift in Sources */,

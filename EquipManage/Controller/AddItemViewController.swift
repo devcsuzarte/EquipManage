@@ -48,12 +48,12 @@ class AddItemViewController: UIViewController {
             let id = newItem.id,
             let user = Auth.auth().currentUser?.email{
             
-            db.collection("items@\(user)").addDocument(data: [
-                "category": category,
-                "title": title,
-                "owner": owner,
-                "department": department,
-                "id": id
+            db.collection(K.FStore.itemsCollection + user).addDocument(data: [
+                K.FStore.itemsCategory: category,
+                K.FStore.itemsTitle: title,
+                K.FStore.itemsOwner: owner,
+                K.FStore.itemsDepartment: department,
+                K.FStore.itemsId: id
                 
             ]) {(error) in
                 if let e = error {
@@ -65,7 +65,7 @@ class AddItemViewController: UIViewController {
                 }
             }
         } else {
-            print("errorrrrr")
+            print("Erro to add item")
         }
     }
     
@@ -74,8 +74,9 @@ class AddItemViewController: UIViewController {
     func updateCount(){
         
         if let id = currentCategoryID, let currentCount = itemsCounter, let user = Auth.auth().currentUser?.email{
-            db.collection("categorys@\(user)").document(id).updateData([
-                "countField": currentCount + 1
+            db.collection(K.FStore.categorysCollection + user)
+                .document(id).updateData([
+                    K.FStore.countField: currentCount + 1
             ]) {(error) in
                 if let e = error {
                     print("Erro to update data \(e)")

@@ -79,11 +79,12 @@ class ReportsTableViewController: UITableViewController {
         
         if let text = report.reportText, let time = report.time, let id = report.reportItemID, let user = Auth.auth().currentUser?.email {
             
-            self.db.collection("reports@\(user)").addDocument(data: [
-                "description": text,
-                "date": currentDate,
-                "time": time,
-                "itemID": id
+            self.db.collection(K.FStore.reportsCollection + user)
+                .addDocument(data: [
+                K.FStore.reportDescription: text,
+                K.FStore.reportDate: currentDate,
+                K.FStore.reportTime: time,
+                K.FStore.reportItemID: id
             ]) {(error) in
                 if let e = error {
                     print("Erro to send data: \(e)")
@@ -100,8 +101,8 @@ class ReportsTableViewController: UITableViewController {
     func loadReports(){
         if let user = Auth.auth().currentUser?.email, let id = currentItemID{
             
-            db.collection("reports@\(user)")
-                .whereField("itemID", isEqualTo: id)
+            db.collection(K.FStore.reportsCollection + user)
+                .whereField(K.FStore.reportItemID, isEqualTo: id)
                 .addSnapshotListener {querySnapshot, error in
                     if let e = error {
                         print("There was an issue to try get data from FireStore: \(e)")
@@ -110,10 +111,10 @@ class ReportsTableViewController: UITableViewController {
                         if let snapshotDocuments = querySnapshot?.documents {
                             for doc in snapshotDocuments {
                                 let data = doc.data()
-                                if let date = data["date"] as? String,
-                                   let time = data["time"] as? String,
-                                   let description = data["description"] as? String,
-                                   let id = data["itemID"] as? String
+                                if let date = data[K.FStore.reportDate] as? String,
+                                   let time = data[K.FStore.reportTime] as? String,
+                                   let description = data[K.FStore.reportDescription] as? String,
+                                   let id = data[K.FStore.reportItemID] as? String
                                   
                                 {
                                     let loadedReport = Report( date: date, time: time, reportText: description, reportItemID: id)
@@ -145,7 +146,7 @@ class ReportsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reportsCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.reportsCell, for: indexPath)
         
         cell.textLabel?.text = reportsList[indexPath.row].reportText
         cell.detailTextLabel?.text = "Last update: \(reportsList[indexPath.row].date!)"
