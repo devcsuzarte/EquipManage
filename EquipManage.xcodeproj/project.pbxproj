@@ -12,6 +12,8 @@
 		FA436B742BEA8E5C008CF7CD /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA436B732BEA8E5C008CF7CD /* Report.swift */; };
 		FA4CC3332BE30DE300CC2503 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA4CC3322BE30DE300CC2503 /* IQKeyboardManagerSwift */; };
 		FA5B149D2BF2BA5B00756439 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5B149C2BF2BA5A00756439 /* GoogleService-Info.plist */; };
+		FA7F3CC52BFC1F2300BBD843 /* AddReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F3CC42BFC1F2300BBD843 /* AddReportViewController.swift */; };
+		FA8E436C2BFDE364003F01A3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E436B2BFDE364003F01A3 /* DataManager.swift */; };
 		FAB516752BE05E480053FDD9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FAB516742BE05E480053FDD9 /* FirebaseAuth */; };
 		FAB516772BE05E480053FDD9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FAB516762BE05E480053FDD9 /* FirebaseFirestore */; };
 		FAB516792BE063640053FDD9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB516782BE063640053FDD9 /* LoginViewController.swift */; };
@@ -26,7 +28,6 @@
 		FADBA9D42BDC10CE001A963D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBA9D32BDC10CE001A963D /* Category.swift */; };
 		FADBA9D62BDC10E0001A963D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBA9D52BDC10E0001A963D /* Item.swift */; };
 		FAEB85012BDEFE95001244F2 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB85002BDEFE95001244F2 /* ItemsViewController.swift */; };
-		FAFA36142BFB407C003127BD /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA36132BFB407C003127BD /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		FA3DD4692BE03BB400ECA277 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		FA436B732BEA8E5C008CF7CD /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		FA5B149C2BF2BA5A00756439 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA7F3CC42BFC1F2300BBD843 /* AddReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportViewController.swift; sourceTree = "<group>"; };
+		FA8E436B2BFDE364003F01A3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FAB516782BE063640053FDD9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FAB5167A2BE063700053FDD9 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		FABBF95E2BF5F576000756C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -48,7 +51,6 @@
 		FADBA9D32BDC10CE001A963D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		FADBA9D52BDC10E0001A963D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FAEB85002BDEFE95001244F2 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
-		FAFA36132BFB407C003127BD /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				FAB516782BE063640053FDD9 /* LoginViewController.swift */,
 				FAB5167A2BE063700053FDD9 /* RegisterViewController.swift */,
 				FA32E7332BEBE57700AC4D20 /* ReportsTableViewController.swift */,
+				FA7F3CC42BFC1F2300BBD843 /* AddReportViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -123,9 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				FADBA9D32BDC10CE001A963D /* Category.swift */,
-				FAFA36132BFB407C003127BD /* DataModel.swift */,
 				FADBA9D52BDC10E0001A963D /* Item.swift */,
 				FA436B732BEA8E5C008CF7CD /* Report.swift */,
+				FA8E436B2BFDE364003F01A3 /* DataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,12 +215,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB5167B2BE063700053FDD9 /* RegisterViewController.swift in Sources */,
+				FA7F3CC52BFC1F2300BBD843 /* AddReportViewController.swift in Sources */,
 				FA436B742BEA8E5C008CF7CD /* Report.swift in Sources */,
+				FA8E436C2BFDE364003F01A3 /* DataManager.swift in Sources */,
 				FADBA9D02BDC1090001A963D /* HomeTableViewController.swift in Sources */,
 				FADBA9D42BDC10CE001A963D /* Category.swift in Sources */,
 				FADBA9BC2BDC0F15001A963D /* AppDelegate.swift in Sources */,
 				FAEB85012BDEFE95001244F2 /* ItemsViewController.swift in Sources */,
-				FAFA36142BFB407C003127BD /* DataModel.swift in Sources */,
 				FAB516792BE063640053FDD9 /* LoginViewController.swift in Sources */,
 				FA3DD46A2BE03BB400ECA277 /* AddItemViewController.swift in Sources */,
 				FADBA9D62BDC10E0001A963D /* Item.swift in Sources */,

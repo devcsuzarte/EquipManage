@@ -10,10 +10,6 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-protocol ReportsDelegate {
-    func didUpdateReports()
-}
-
 class ReportsTableViewController: UITableViewController {
     
     let db = Firestore.firestore()
@@ -34,7 +30,7 @@ class ReportsTableViewController: UITableViewController {
     }
     
         // MARK: - Add Button Alert
-    @IBAction func addCatButtonPressed(_ sender: UIBarButtonItem) {
+   /* @IBAction func addReportButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
         
@@ -97,11 +93,23 @@ class ReportsTableViewController: UITableViewController {
             
         }
     }
+    */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.addReportSegue {
+            
+            let destinationVC = segue.destination as! AddReportViewController
+            
+            if let id = currentItemID {
+                destinationVC.itemID = id
+            }
+        }
+    }
     
     func loadReports(){
         if let user = Auth.auth().currentUser?.email, let id = currentItemID{
             
             db.collection(K.FStore.reportsCollection + user)
+                .order(by: K.FStore.reportTime, descending: true)
                 .whereField(K.FStore.reportItemID, isEqualTo: id)
                 .addSnapshotListener {querySnapshot, error in
                     if let e = error {
@@ -112,12 +120,11 @@ class ReportsTableViewController: UITableViewController {
                             for doc in snapshotDocuments {
                                 let data = doc.data()
                                 if let date = data[K.FStore.reportDate] as? String,
-                                   let time = data[K.FStore.reportTime] as? String,
                                    let description = data[K.FStore.reportDescription] as? String,
                                    let id = data[K.FStore.reportItemID] as? String
                                   
                                 {
-                                    let loadedReport = Report( date: date, time: time, reportText: description, reportItemID: id)
+                                    let loadedReport = Report( date: date, reportText: description, reportItemID: id)
                                     print(">>>>>>REPORT LOADED: \(loadedReport)")
                                     self.reportsList.append(loadedReport)
                                     
@@ -150,7 +157,7 @@ class ReportsTableViewController: UITableViewController {
         
         cell.textLabel?.text = reportsList[indexPath.row].reportText
         cell.detailTextLabel?.text = "Last update: \(reportsList[indexPath.row].date!)"
-
+        
         return cell
     }
 }

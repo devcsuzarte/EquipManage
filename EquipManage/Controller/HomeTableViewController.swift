@@ -82,7 +82,7 @@ class HomeTableViewController: UITableViewController {
             
             
             if let title = newItem.title, let count = newItem.counter, let user = Auth.auth().currentUser?.email {
-                
+
                 self.db.collection(K.FStore.categorysCollection + user).addDocument(data: [
                     K.FStore.titleField: title,
                     K.FStore.countField: count
@@ -130,13 +130,6 @@ class HomeTableViewController: UITableViewController {
         
         cell.textLabel?.text = cat[indexPath.row].title!
         cell.detailTextLabel?.text = String(cat[indexPath.row].counter!)
-        /*
-        cell.detailTextLabel?.backgroundColor = UIColor.blue
-        cell.detailTextLabel?.textColor = UIColor.white
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 15.0)
-        cell.detailTextLabel?.layer.masksToBounds = true
-        cell.detailTextLabel?.layer.cornerRadius = 5*/
-
         return cell
     }
     
@@ -162,29 +155,3 @@ class HomeTableViewController: UITableViewController {
         }
     }
 }
-
-
-/*
- 
- db.collection("categorys@\(user)")
-     .addSnapshotListener {querySnapshot, error in
-         
-         if let e = error {
-             print("There was an issue to try get data from FireStore: \(e)")
-         } else {
-             if let snapshotDocuments = querySnapshot?.documents {
-                 for doc in snapshotDocuments {
-                     let data = doc.data()
-                     if let categoryName = data["titleField"] as? String, let count = data["countField"] as? Int {
-                         let loadedCat = Category(title: categoryName, count: count)
-                         self.cat.append(loadedCat)
-                         
-                         DispatchQueue.main.async {
-                             self.tableView.reloadData()
-                         }
-                     }
-                 }
-             }
-         }
-     }
- */

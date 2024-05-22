@@ -13,6 +13,7 @@ struct K {
     static let itemsSegue = "goToItems"
     static let addSegue = "goToAddItem"
     static let reportsSegue = "goToReports"
+    static let addReportSegue = "goToAddReport"
     
     static let categotyCell = "categoryCell"
     static let itemsCell = "itemsCell"

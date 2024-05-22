@@ -10,7 +10,6 @@ import Foundation
 struct Report {
     
     var date: String?
-    var time: String?
     var reportText: String?
     var reportItemID: String?
 }
