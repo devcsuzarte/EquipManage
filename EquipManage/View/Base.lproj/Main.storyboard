@@ -373,12 +373,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reports" id="7Wj-Hq-JSp">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="byd-l9-sih">
-                            <connections>
-                                <action selector="addReportButtonPressed:" destination="FYp-fq-Mdp" id="0xn-QI-dxA"/>
-                                <segue destination="xWz-8u-yuh" kind="presentation" identifier="goToAddReport" id="DUb-Xy-mYO"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="compose" id="byd-l9-sih">
+                                <connections>
+                                    <action selector="addReportButtonPressed:" destination="FYp-fq-Mdp" id="0xn-QI-dxA"/>
+                                    <segue destination="xWz-8u-yuh" kind="presentation" identifier="goToAddReport" id="DUb-Xy-mYO"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="Suu-rj-P6a">
+                                <connections>
+                                    <action selector="barBtnTest:" destination="FYp-fq-Mdp" id="KXT-ex-de0"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C1O-JF-Whd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

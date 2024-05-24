@@ -10,16 +10,19 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+protocol ReportDelegate {
+    func didReportWasAdd()
+}
+
 class AddReportViewController: UIViewController {
     
     var itemID: String?
+    var delegate: ReportDelegate?
     
     let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBOutlet weak var reportTextView: UITextView!
@@ -49,6 +52,7 @@ class AddReportViewController: UIViewController {
                             print("Erro to send data: \(e)")
                         } else {
                             print("Sucessfully send data")
+                            self.delegate?.didReportWasAdd()
                             self.dismiss(animated: true, completion: nil)
                         }
                     }

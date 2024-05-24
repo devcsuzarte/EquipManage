@@ -10,9 +10,10 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-class ReportsTableViewController: UITableViewController {
-    
+class ReportsTableViewController: UITableViewController, ReportDelegate{
+        
     let db = Firestore.firestore()
+    var addReport = AddReportViewController()
     
     var reportsList: [Report] = []
     var currentItemID: String?
@@ -21,15 +22,15 @@ class ReportsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
-
+        addReport.delegate = self
+        
         if let id = currentItemID{
             
             print(id)
             loadReports()
         }
     }
-    
-        // MARK: - Add Button Alert
+    // MARK: - Add Button Alert
    /* @IBAction func addReportButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
@@ -98,6 +99,7 @@ class ReportsTableViewController: UITableViewController {
         if segue.identifier == K.addReportSegue {
             
             let destinationVC = segue.destination as! AddReportViewController
+            destinationVC.delegate = self
             
             if let id = currentItemID {
                 destinationVC.itemID = id
@@ -125,7 +127,7 @@ class ReportsTableViewController: UITableViewController {
                                   
                                 {
                                     let loadedReport = Report( date: date, reportText: description, reportItemID: id)
-                                    print(">>>>>>REPORT LOADED: \(loadedReport)")
+                                    //print(">>>>>>REPORT LOADED: \(loadedReport)")
                                     self.reportsList.append(loadedReport)
                                     
                                     DispatchQueue.main.async {
@@ -137,6 +139,10 @@ class ReportsTableViewController: UITableViewController {
                     }
                 }
         }
+    }
+    
+    func didReportWasAdd() {
+        loadReports()
     }
     
     // MARK: - Table view data source

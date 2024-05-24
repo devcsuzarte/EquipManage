@@ -10,15 +10,21 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+protocol DataManagerDelegate{
+    func didUpdateSomething()
+}
 
-struct DataManager {
+class DataManager {
     
     let db = Firestore.firestore()
     private let currentUser = Auth.auth().currentUser?.email
     
+    var delegate: DataManagerDelegate?
+    
+    func loadItems(){
+        print("items loaded")
+        delegate?.didUpdateSomething()
+    }
 
-    
-    
-    
     
 }
