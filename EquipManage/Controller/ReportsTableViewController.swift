@@ -14,6 +14,7 @@ class ReportsTableViewController: UITableViewController, ReportDelegate{
         
     let db = Firestore.firestore()
     var addReport = AddReportViewController()
+    var dataManager = DataManager()
     
     var reportsList: [Report] = []
     var currentItemID: String?
@@ -23,78 +24,10 @@ class ReportsTableViewController: UITableViewController, ReportDelegate{
         
         tableView.dataSource = self
         addReport.delegate = self
-        
-        if let id = currentItemID{
-            
-            print(id)
-            loadReports()
-        }
+     //   dataManager.delegate = self
+        getReports()
     }
-    // MARK: - Add Button Alert
-   /* @IBAction func addReportButtonPressed(_ sender: UIBarButtonItem) {
-        
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Add new Report", message: "", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Add Report", style: .default) {(action) in
-            
-            var newReport = Report()
-            newReport.reportText = textField.text
-            newReport.time = String(Date().timeIntervalSince1970)
-            newReport.reportItemID = self.currentItemID
-            
-            if let reportTime = newReport.time, let txt = newReport.reportText {
-                self.addReport(newReport)
-            }
-
-        }
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new report"
-            textField = alertTextField
-        }
-        
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    
-    
-    
-    
-        // MARK: - Firebase Methods
-    
-    func addReport(_ report: Report){
-        
-        var currentDate: String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-            let formattedDate = dateFormatter.string(from: Date())
-            return formattedDate
-        }
-        
-        if let text = report.reportText, let time = report.time, let id = report.reportItemID, let user = Auth.auth().currentUser?.email {
-            
-            self.db.collection(K.FStore.reportsCollection + user)
-                .addDocument(data: [
-                K.FStore.reportDescription: text,
-                K.FStore.reportDate: currentDate,
-                K.FStore.reportTime: time,
-                K.FStore.reportItemID: id
-            ]) {(error) in
-                if let e = error {
-                    print("Erro to send data: \(e)")
-                } else {
-                    print("Sucessfully send data")
-                }
-            }
-            
-            self.loadReports()
-            
-        }
-    }
-    */
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.addReportSegue {
             
@@ -107,6 +40,21 @@ class ReportsTableViewController: UITableViewController, ReportDelegate{
         }
     }
     
+    
+    
+    func getReports(){
+        if let id = currentItemID{
+
+                dataManager.loadReports(for: id) { report in
+                    print("\\\\\\\\\\THIS WAS GETTED BY GET REPORTS")
+                    print(report)
+                    self.reportsList = report
+                    self.tableView.reloadData()
+                    
+                }
+        }
+    }
+    /*
     func loadReports(){
         if let user = Auth.auth().currentUser?.email, let id = currentItemID{
             
@@ -139,11 +87,14 @@ class ReportsTableViewController: UITableViewController, ReportDelegate{
                     }
                 }
         }
-    }
+    }*/
     
     func didReportWasAdd() {
-        loadReports()
+        print("oiii")
+        
+        //getReports()
     }
+
     
     // MARK: - Table view data source
 
