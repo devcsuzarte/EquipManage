@@ -20,19 +20,16 @@ class ItemsViewController: UITableViewController {
     var itemID: String?
     var selectedIndex: Int?
     
+    var dataManager = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
         tableView.dataSource = self
+        getItemsList()
         
 
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        loadItems()
-    }
-    
     
     @IBAction func addItemButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: K.addSegue, sender: self)
@@ -90,41 +87,15 @@ class ItemsViewController: UITableViewController {
         }
     }
     
-        // MARK: - FIREBASE
+        // MARK: - Get Items List
     
-    func loadItems() {
-                
-        if let user = Auth.auth().currentUser?.email, let categoryName = selectedCategory{
-            
-            db.collection(K.FStore.itemsCollection + user)
-                .whereField(K.FStore.itemsCategory, isEqualTo: categoryName)
-                .addSnapshotListener {querySnapshot, error in
-                    
-                    if let e = error {
-                        print("There was an issue to try get data from FireStore: \(e)")
-                    } else {
-                        self.items = []
-                        if let snapshotDocuments = querySnapshot?.documents {
-                            for doc in snapshotDocuments {
-                                let data = doc.data()
-                                if let category = data[K.FStore.itemsCategory] as? String,
-                                   let title = data[K.FStore.itemsTitle] as? String,
-                                   let owner = data[K.FStore.itemsOwner] as? String,
-                                   let department = data[K.FStore.itemsDepartment] as? String,
-                                   let itemID = data[K.FStore.itemsId] as? Int
-                                {
-                                    let loadedItem = Item(category: category, title: title, id: itemID, docID: doc.documentID, onwer: owner, depatarment: department)
+    func getItemsList(){
         
-                                    self.items.append(loadedItem)
-                                    
-                                    DispatchQueue.main.async {
-                                        self.tableView.reloadData()
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        if let currentCategory = selectedCategory {
+            dataManager.loadItems(for: currentCategory) { items in
+                self.items = items
+                self.tableView.reloadData()
+            }
         }
     }
 }
