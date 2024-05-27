@@ -121,6 +121,62 @@ class DataManager {
     }
     
     
+    // MARK: ADD CATEGORY
+    
+    func addItem(_ newItem: Item, _ categoryID: String, _ currentCount: Int){
+        
+        if let category = newItem.category,
+            let title = newItem.title,
+            let owner = newItem.onwer,
+            let department = newItem.depatarment,
+            let id = newItem.id,
+            let user = currentUser {
+            
+            db.collection(K.FStore.itemsCollection + user).addDocument(data: [
+                K.FStore.itemsCategory: category,
+                K.FStore.itemsTitle: title,
+                K.FStore.itemsOwner: owner,
+                K.FStore.itemsDepartment: department,
+                K.FStore.itemsId: id
+                
+            ]) {(error) in
+                if let e = error {
+                    print("Erro to send data: \(e)")
+                } else {
+                    print("Sucessfully send data")
+                    self.db.collection(K.FStore.categorysCollection + user)
+                        .document(categoryID).updateData([
+                            K.FStore.countField: currentCount + 1
+                        ]) {(error) in
+                            if let e = error {
+                                print("Erro to update data \(e)")
+                            } else {
+                                print("Sucessfully update data")
+                            }
+                        }
+                }
+            }
+        } else {
+            print("Erro to add item")
+        }
+    }
+    
+    func updateCount(_ categoryId: String, _ count: Int){
+        if let user = currentUser {
+            db.collection(K.FStore.categorysCollection + user)
+                .document(categoryId).updateData([
+                    K.FStore.countField: count + 1
+                ]) {(error) in
+                    if let e = error {
+                        print("Erro to update data \(e)")
+                    } else {
+                        print("Sucessfully update data")
+                    }
+                }
+        }
+    }
+    
+    
     // MARK: - LOAD REPORTS
     
     func loadReports(for currentId: String?, completion: @escaping ([Report]) -> Void){

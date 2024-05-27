@@ -18,6 +18,7 @@ class AddItemViewController: UIViewController {
     let db = Firestore.firestore()
     
     var newItem = Item()
+    var dataManager = DataManager()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var ownerTextField: UITextField!
@@ -41,50 +42,10 @@ class AddItemViewController: UIViewController {
         newItem.depatarment = departmentTextField.text
         newItem.id = 0
         
-        if let category = newItem.category,
-            let title = newItem.title,
-            let owner = newItem.onwer,
-            let department = newItem.depatarment,
-            let id = newItem.id,
-            let user = Auth.auth().currentUser?.email{
-            
-            db.collection(K.FStore.itemsCollection + user).addDocument(data: [
-                K.FStore.itemsCategory: category,
-                K.FStore.itemsTitle: title,
-                K.FStore.itemsOwner: owner,
-                K.FStore.itemsDepartment: department,
-                K.FStore.itemsId: id
-                
-            ]) {(error) in
-                if let e = error {
-                    print("Erro to send data: \(e)")
-                } else {
-                    print("Sucessfully send data")
-                    self.updateCount()
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        } else {
-            print("Erro to add item")
+        if let categoryID = currentCategoryID, let count = itemsCounter {
+            dataManager.addItem(newItem, categoryID, count)
+            self.dismiss(animated: true, completion: nil)
         }
-    }
     
-    
-    
-    func updateCount(){
-        
-        if let id = currentCategoryID, let currentCount = itemsCounter, let user = Auth.auth().currentUser?.email{
-            db.collection(K.FStore.categorysCollection + user)
-                .document(id).updateData([
-                    K.FStore.countField: currentCount + 1
-            ]) {(error) in
-                if let e = error {
-                    print("Erro to update data \(e)")
-                } else {
-                    print("Sucessfully update data")
-                }
-            }
-        }
-        
     }
 }
