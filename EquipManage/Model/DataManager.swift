@@ -15,22 +15,19 @@ protocol DataManagerCategory{
     func didCategoryWasAdd()
 }
 
-protocol DataManagerItem{
-    func didItemWasAdd()
-}
-
-protocol DataManagerReport{
-    func didReportWasAdd()
-}
 class DataManager {
-    
-    
+
     let db = Firestore.firestore()
     private let currentUser = Auth.auth().currentUser?.email
     
     var categoryDelagte: DataManagerCategory?
-    var itemDelagte: DataManagerItem?
-    var reportDelegate: DataManagerReport?
+    
+    var currentDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        let formattedDate = dateFormatter.string(from: Date())
+        return formattedDate
+    }
     
     // MARK: - LOAD CATEGORYS
     
@@ -43,23 +40,23 @@ class DataManager {
                 .order(by: K.FStore.titleField)
                 .getDocuments
             {querySnapshot, error in
-                    if let e = error {
-                        print("There was an issue to try get data from FireStore: \(e)")
-                    } else {
-                        if let snapshotDocuments = querySnapshot?.documents {
-                            for doc in snapshotDocuments {
-                                let data = doc.data()
-                                if let categoryName = data[K.FStore.titleField] as? String, let count = data[K.FStore.countField] as? Int {
-                                    let loadedCat = Category(title: categoryName, counter: count, categoryID: doc.documentID)
-                                    categorysList.append(loadedCat)
-                                }
+                if let e = error {
+                    print("There was an issue to try get data from FireStore: \(e)")
+                } else {
+                    if let snapshotDocuments = querySnapshot?.documents {
+                        for doc in snapshotDocuments {
+                            let data = doc.data()
+                            if let categoryName = data[K.FStore.titleField] as? String, let count = data[K.FStore.countField] as? Int {
+                                let loadedCat = Category(title: categoryName, counter: count, categoryID: doc.documentID)
+                                categorysList.append(loadedCat)
                             }
                         }
-                        completion(categorysList)
                     }
+                    completion(categorysList)
                 }
+            }
             
-           
+            
         } else {
             completion([])
         }
@@ -108,7 +105,7 @@ class DataManager {
                                    let itemID = data[K.FStore.itemsId] as? Int
                                 {
                                     let loadedItem = Item(category: category, title: title, id: itemID, docID: doc.documentID, onwer: owner, depatarment: department)
-        
+                                    
                                     itemsList.append(loadedItem)
                                 }
                             }
@@ -121,16 +118,16 @@ class DataManager {
     }
     
     
-    // MARK: ADD CATEGORY
+    // MARK: - ADD ITEM
     
     func addItem(_ newItem: Item, _ categoryID: String, _ currentCount: Int){
         
         if let category = newItem.category,
-            let title = newItem.title,
-            let owner = newItem.onwer,
-            let department = newItem.depatarment,
-            let id = newItem.id,
-            let user = currentUser {
+           let title = newItem.title,
+           let owner = newItem.onwer,
+           let department = newItem.depatarment,
+           let id = newItem.id,
+           let user = currentUser {
             
             db.collection(K.FStore.itemsCollection + user).addDocument(data: [
                 K.FStore.itemsCategory: category,
@@ -161,29 +158,13 @@ class DataManager {
         }
     }
     
-    func updateCount(_ categoryId: String, _ count: Int){
-        if let user = currentUser {
-            db.collection(K.FStore.categorysCollection + user)
-                .document(categoryId).updateData([
-                    K.FStore.countField: count + 1
-                ]) {(error) in
-                    if let e = error {
-                        print("Erro to update data \(e)")
-                    } else {
-                        print("Sucessfully update data")
-                    }
-                }
-        }
-    }
-    
-    
     // MARK: - LOAD REPORTS
     
     func loadReports(for currentId: String?, completion: @escaping ([Report]) -> Void){
         if let user = currentUser, let id = currentId{
             db.collection(K.FStore.reportsCollection + user)
-                .order(by: K.FStore.reportTime, descending: true)
                 .whereField(K.FStore.reportItemID, isEqualTo: id)
+                .order(by: K.FStore.reportTime, descending: true)
                 .addSnapshotListener {querySnapshot, error in
                     if let e = error {
                         print("There was an issue to try get data from FireStore: \(e)")
@@ -195,21 +176,40 @@ class DataManager {
                                 if let date = data[K.FStore.reportDate] as? String,
                                    let description = data[K.FStore.reportDescription] as? String,
                                    let id = data[K.FStore.reportItemID] as? String
-                                  
+                                    
                                 {
                                     let loadedReport = Report( date: date, reportText: description, reportItemID: id)
-                                    //print(">>>>>>REPORT LOADED: \(loadedReport)")
                                     reportsList.append(loadedReport)
                                     
                                 }
                             }
                         }
-                            completion(reportsList)
+                        completion(reportsList)
                     }
                 }
         } else {
-            print("Não pegou")
+            print("Erro to add report")
             completion([])
+        }
+    }
+    
+    // MARK: - ADD REPORTS
+    
+    func addReport(with text: String, for id: String){
+        if let user = currentUser{
+            db.collection(K.FStore.reportsCollection + user)
+                .addDocument(data: [
+                    K.FStore.reportDescription: text,
+                    K.FStore.reportDate: currentDate,
+                    K.FStore.reportTime: Date().timeIntervalSince1970,
+                    K.FStore.reportItemID: id
+                ]) {(error) in
+                    if let e = error {
+                        print("Erro to send data: \(e)")
+                    } else {
+                        print("Sucessfully send data")
+                                        }
+                }
         }
     }
 }

@@ -6,8 +6,10 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
+
+protocol AddItemDelegate{
+    func didItemWasAdd()
+}
 
 class AddItemViewController: UIViewController {
     
@@ -15,10 +17,9 @@ class AddItemViewController: UIViewController {
     var currentCategory: String?
     var itemsCounter: Int?
     
-    let db = Firestore.firestore()
-    
     var newItem = Item()
     var dataManager = DataManager()
+    var delegate: AddItemDelegate?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var ownerTextField: UITextField!
@@ -44,6 +45,7 @@ class AddItemViewController: UIViewController {
         
         if let categoryID = currentCategoryID, let count = itemsCounter {
             dataManager.addItem(newItem, categoryID, count)
+            delegate?.didItemWasAdd()
             self.dismiss(animated: true, completion: nil)
         }
     

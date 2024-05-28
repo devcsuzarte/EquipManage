@@ -6,21 +6,18 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
 
-protocol ReportDelegate {
+protocol AddReportDelegate {
     func didReportWasAdd()
 }
 
 class AddReportViewController: UIViewController {
     
     var itemID: String?
-    var delegate: ReportDelegate?
     
-    let db = Firestore.firestore()
-
+    var dataManager = DataManager()
+    var delegate: AddReportDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -32,32 +29,11 @@ class AddReportViewController: UIViewController {
         report.reportText = reportTextView.text
         report.reportItemID = itemID
       
-            var currentDate: String {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-                let formattedDate = dateFormatter.string(from: Date())
-                return formattedDate
-            }
-            
-            if let text = report.reportText,let id = report.reportItemID, let user = Auth.auth().currentUser?.email {
-                
-                db.collection(K.FStore.reportsCollection + user)
-                    .addDocument(data: [
-                        K.FStore.reportDescription: text,
-                        K.FStore.reportDate: currentDate,
-                        K.FStore.reportTime: Date().timeIntervalSince1970,
-                        K.FStore.reportItemID: id
-                    ]) {(error) in
-                        if let e = error {
-                            print("Erro to send data: \(e)")
-                        } else {
-                            print("Sucessfully send data")
-                            self.delegate?.didReportWasAdd()
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
-                
-                
+    
+        if let text = report.reportText,let id = report.reportItemID {
+                dataManager.addReport(with: text, for: id)
+                delegate?.didReportWasAdd()
+                self.dismiss(animated: true, completion: nil)
             }
     }
 

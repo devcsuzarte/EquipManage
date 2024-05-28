@@ -6,14 +6,9 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
 
-class ItemsViewController: UITableViewController {
+class ItemsViewController: UITableViewController, AddItemDelegate {
 
-    
-    let db = Firestore.firestore()
     var items = [Item]()
     var selectedCategory: String?
     var categoryID: String?
@@ -26,6 +21,7 @@ class ItemsViewController: UITableViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
         tableView.dataSource = self
+        
         getItemsList()
         
 
@@ -69,6 +65,8 @@ class ItemsViewController: UITableViewController {
       if segue.identifier == K.addSegue {
           let destinationVC = segue.destination as! AddItemViewController
           
+          destinationVC.delegate = self
+          
           if let categoryToItem = selectedCategory, let id = categoryID {
               destinationVC.currentCategory = categoryToItem
               destinationVC.currentCategoryID = id
@@ -85,6 +83,12 @@ class ItemsViewController: UITableViewController {
             }
             
         }
+    }
+    
+    
+    func didItemWasAdd() {
+        print("Did Report Was Add")
+        getItemsList()
     }
     
         // MARK: - Get Items List
