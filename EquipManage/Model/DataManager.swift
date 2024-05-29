@@ -18,7 +18,7 @@ protocol DataManagerCategory{
 class DataManager {
 
     let db = Firestore.firestore()
-    private let currentUser = Auth.auth().currentUser?.email
+    private let currentUser = Auth.auth().currentUser?.uid
     
     var categoryDelagte: DataManagerCategory?
     

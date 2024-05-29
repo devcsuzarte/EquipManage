@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyP-cP-Rdb">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -120,8 +120,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KyG-p6-8ig">
-                                            <rect key="frame" x="383.66666666666669" y="14" width="10.333333333333334" height="18"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KyG-p6-8ig">
+                                            <rect key="frame" x="351.33333333333331" y="14" width="42.666666666666664" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <nil key="textColor"/>
@@ -262,21 +262,26 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xuU-wF-K0c">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="37.333333333333336"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-uG-3CE">
                                         <rect key="frame" x="0.0" y="62.333333333333343" width="394" height="37.333333333333343"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kc9-DU-rY9">
                                         <rect key="frame" x="0.0" y="124.66666666666664" width="394" height="37.333333333333329"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="suY-zV-xHm">
                                         <rect key="frame" x="0.0" y="187" width="394" height="37.333333333333343"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -295,27 +300,21 @@
                                                 <action selector="cancelButtonPressed:" destination="iCh-Gw-aBO" id="85v-9p-H2U"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="1RB-vT-XOs">
+                                            <color key="tintColor" name="navBarItems"/>
+                                            <connections>
+                                                <action selector="saveButtonPressed:" destination="iCh-Gw-aBO" id="JMn-Lu-qPN"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-o6-wgF">
-                                <rect key="frame" x="164" y="363.33333333333331" width="86" height="56"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="35"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="addItemButtonPressed:" destination="iCh-Gw-aBO" eventType="touchUpInside" id="pAC-Ws-oCp"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jrL-nW-wq0"/>
                         <color key="backgroundColor" name="generalColor"/>
                         <constraints>
                             <constraint firstItem="Twn-9E-hNf" firstAttribute="top" secondItem="M5Y-1Q-Pd2" secondAttribute="bottom" constant="25" id="3he-ha-BiV"/>
-                            <constraint firstItem="F3a-o6-wgF" firstAttribute="top" secondItem="Twn-9E-hNf" secondAttribute="bottom" constant="70" id="63c-XH-yB2"/>
                             <constraint firstItem="jrL-nW-wq0" firstAttribute="trailing" secondItem="Twn-9E-hNf" secondAttribute="trailing" constant="10" id="BgH-KW-tao"/>
-                            <constraint firstItem="F3a-o6-wgF" firstAttribute="centerX" secondItem="rnm-Bb-h0S" secondAttribute="centerX" id="W35-3n-47g"/>
                             <constraint firstItem="M5Y-1Q-Pd2" firstAttribute="leading" secondItem="jrL-nW-wq0" secondAttribute="leading" id="jXp-iD-brY"/>
                             <constraint firstItem="Twn-9E-hNf" firstAttribute="leading" secondItem="jrL-nW-wq0" secondAttribute="leading" constant="10" id="pCT-tr-Hvm"/>
                             <constraint firstItem="M5Y-1Q-Pd2" firstAttribute="top" secondItem="jrL-nW-wq0" secondAttribute="top" id="v3O-bE-Mms"/>
@@ -349,7 +348,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="51.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EZn-eJ-0eb">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EZn-eJ-0eb">
                                             <rect key="frame" x="20" y="7.3333333333333357" width="30" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -507,7 +506,7 @@
         <image name="note.text" catalog="system" width="128" height="107"/>
         <image name="plus.square.fill.on.square.fill" catalog="system" width="128" height="120"/>
         <namedColor name="generalColor">
-            <color red="0.0" green="0.45500001311302185" blue="0.71799999475479126" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.6940000057220459" green="0.83099997043609619" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navBarItems">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

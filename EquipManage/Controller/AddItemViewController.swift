@@ -35,8 +35,7 @@ class AddItemViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addItemButtonPressed(_ sender: UIButton) {
-        
+    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         newItem.category = currentCategory
         newItem.title = titleTextField.text
         newItem.onwer = ownerTextField.text
@@ -48,6 +47,6 @@ class AddItemViewController: UIViewController {
             delegate?.didItemWasAdd()
             self.dismiss(animated: true, completion: nil)
         }
-    
+        
     }
 }

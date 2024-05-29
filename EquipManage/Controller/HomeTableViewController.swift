@@ -6,15 +6,10 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
 
 class HomeTableViewController: UITableViewController, DataManagerCategory {
             
-    let db = Firestore.firestore()
-    
-    var cat: [Category] = []
+    var cat: [Category]?
     var sendCategoryName: String?
     var sendCategoryID: String?
     var dataManager = DataManager()
@@ -34,8 +29,10 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
     func getCategorysList(){
         
         dataManager.loadCategorys { category in
-            self.cat = category
-            self.tableView.reloadData()
+            if category.count > 0 {
+                self.cat = category
+                self.tableView.reloadData()
+            }
         }
         
     }
@@ -82,25 +79,34 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return cat.count
+        return cat?.count ?? 1
     }
 
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.categotyCell, for: indexPath)
         
-        cell.textLabel?.text = cat[indexPath.row].title!
-        cell.detailTextLabel?.text = String(cat[indexPath.row].counter!)
+        if let category = cat?[indexPath.row] {
+            cell.textLabel?.text = category.title!
+            cell.detailTextLabel?.text = String(category.counter!)
+        } else {
+            cell.textLabel?.text = "No categorys"
+            cell.textLabel?.textColor = .systemGray6
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        sendCategoryName = cat[indexPath.row].title!
-        sendCategoryID = cat[indexPath.row].categoryID!
         
-        
-        performSegue(withIdentifier: K.itemsSegue, sender: self)
+        if let category = cat?[indexPath.row] {
+            
+            sendCategoryName = category.title!
+            sendCategoryID = category.categoryID!
+            
+            
+            performSegue(withIdentifier: K.itemsSegue, sender: self)
+        }
         
         
     }
