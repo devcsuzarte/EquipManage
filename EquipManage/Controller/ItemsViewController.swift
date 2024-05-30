@@ -9,7 +9,7 @@ import UIKit
 
 class ItemsViewController: UITableViewController, AddItemDelegate {
 
-    var items = [Item]()
+    var itemsList: [Item]?
     var selectedCategory: String?
     var categoryID: String?
     var itemID: String?
@@ -38,25 +38,33 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return itemsList?.count ?? 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.itemsCell, for: indexPath)
         
-        cell.textLabel?.text = items[indexPath.row].title!
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
-        cell.detailTextLabel?.text = "\(items[indexPath.row].onwer!) - \(items[indexPath.row].depatarment!)"
-        
+        if let item = itemsList?[indexPath.row] {
+            cell.textLabel?.text = item.title!
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
+            cell.detailTextLabel?.text = "\(item.onwer!) - \(item.depatarment!)"
+        } else {
+            cell.textLabel?.text = "No items"
+            cell.textLabel?.font = .systemFont(ofSize: 15.0, weight: .regular)
+            cell.accessoryType = .none
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
-        selectedIndex = indexPath.row
-                
-        performSegue(withIdentifier: K.reportsSegue, sender: self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.itemsCell, for: indexPath)
+        
+        if itemsList != nil {
+            selectedIndex = indexPath.row
+            performSegue(withIdentifier: K.reportsSegue, sender: self)
+        }
+
     }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,7 +75,7 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
           
           destinationVC.delegate = self
           
-          if let categoryToItem = selectedCategory, let id = categoryID {
+          if let categoryToItem = selectedCategory, let id = categoryID, let items = itemsList {
               destinationVC.currentCategory = categoryToItem
               destinationVC.currentCategoryID = id
               destinationVC.itemsCounter = items.count
@@ -78,7 +86,7 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
       if segue.identifier == K.reportsSegue {
             let destinationVC = segue.destination as! ReportsTableViewController
             
-            if let i =  selectedIndex {
+          if let i =  selectedIndex, let items = itemsList {
                 destinationVC.currentItemID = items[i].docID
             }
             
@@ -97,8 +105,10 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
         
         if let currentCategory = selectedCategory {
             dataManager.loadItems(for: currentCategory) { items in
-                self.items = items
-                self.tableView.reloadData()
+                if items.count > 0 {
+                    self.itemsList = items
+                    self.tableView.reloadData()
+                }
             }
         }
     }

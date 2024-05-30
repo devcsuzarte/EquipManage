@@ -29,6 +29,7 @@ class AddItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
+        print(currentCategoryID!)
             }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -46,6 +47,8 @@ class AddItemViewController: UIViewController {
             dataManager.addItem(newItem, categoryID, count)
             delegate?.didItemWasAdd()
             self.dismiss(animated: true, completion: nil)
+        }else{
+            print("-----something is nill------")
         }
         
     }

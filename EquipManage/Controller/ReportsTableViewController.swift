@@ -11,7 +11,7 @@ class ReportsTableViewController: UITableViewController, AddReportDelegate{
     
     var dataManager = DataManager()
     
-    var reportsList: [Report] = []
+    var reportsList: [Report]?
     var currentItemID: String?
 
     override func viewDidLoad() {
@@ -36,8 +36,10 @@ class ReportsTableViewController: UITableViewController, AddReportDelegate{
     func getReports(){
         if let id = currentItemID{
                 dataManager.loadReports(for: id) { report in
-                    self.reportsList = report
-                    self.tableView.reloadData()
+                    if !report.isEmpty{
+                        self.reportsList = report
+                        self.tableView.reloadData()
+                    }
                 }
         }
     }
@@ -56,15 +58,17 @@ class ReportsTableViewController: UITableViewController, AddReportDelegate{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return reportsList.count
+        return reportsList?.count ?? 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.reportsCell, for: indexPath)
         
-        cell.textLabel?.text = reportsList[indexPath.row].reportText
-        cell.detailTextLabel?.text = "Last update: \(reportsList[indexPath.row].date!)"
+        if let reports = reportsList?[indexPath.row] {
+            cell.textLabel?.text = reports.reportText
+            cell.detailTextLabel?.text = "Last update: \(reports.date!)"
+        }
         
         return cell
     }

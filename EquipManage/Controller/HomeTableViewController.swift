@@ -87,7 +87,8 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.categotyCell, for: indexPath)
         
         if let category = cat?[indexPath.row] {
-            cell.textLabel?.text = category.title!
+            cell.textLabel?.text = category.title
+            cell.textLabel?.textColor = .label
             cell.detailTextLabel?.text = String(category.counter!)
         } else {
             cell.textLabel?.text = "No categorys"
