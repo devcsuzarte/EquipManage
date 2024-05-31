@@ -68,6 +68,10 @@ class ReportsTableViewController: UITableViewController, AddReportDelegate{
         if let reports = reportsList?[indexPath.row] {
             cell.textLabel?.text = reports.reportText
             cell.detailTextLabel?.text = "Last update: \(reports.date!)"
+        } else {
+            cell.textLabel?.text = "No reports"
+            cell.detailTextLabel?.text = ""
+            
         }
         
         return cell

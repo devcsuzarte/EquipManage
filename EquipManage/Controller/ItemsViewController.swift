@@ -21,10 +21,7 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
         tableView.dataSource = self
-        
         getItemsList()
-        
-
     }
     
     @IBAction func addItemButtonPressed(_ sender: UIBarButtonItem) {
@@ -49,6 +46,7 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
             cell.textLabel?.text = item.title!
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
             cell.detailTextLabel?.text = "\(item.onwer!) - \(item.depatarment!)"
+            cell.accessoryType = .disclosureIndicator
         } else {
             cell.textLabel?.text = "No items"
             cell.textLabel?.font = .systemFont(ofSize: 15.0, weight: .regular)
@@ -58,8 +56,7 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.itemsCell, for: indexPath)
-        
+    
         if itemsList != nil {
             selectedIndex = indexPath.row
             performSegue(withIdentifier: K.reportsSegue, sender: self)
@@ -75,10 +72,10 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
           
           destinationVC.delegate = self
           
-          if let categoryToItem = selectedCategory, let id = categoryID, let items = itemsList {
+          if let categoryToItem = selectedCategory, let id = categoryID{
               destinationVC.currentCategory = categoryToItem
               destinationVC.currentCategoryID = id
-              destinationVC.itemsCounter = items.count
+              destinationVC.itemsCounter = itemsList?.count ?? 0
           }
           
       }
@@ -110,6 +107,32 @@ class ItemsViewController: UITableViewController, AddItemDelegate {
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+}
+
+extension ItemsViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        var filteredList: [Item] = []
+        
+        if let items = itemsList {
+            for item in items {
+                if item.title!.contains(searchBar.text!){
+                    filteredList.append(item)
+                }
+            }
+            
+            itemsList = filteredList
+            tableView.reloadData()
+            
+        }
+    }
+    
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0 {
+            getItemsList()
         }
     }
 }

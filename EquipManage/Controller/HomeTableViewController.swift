@@ -14,6 +14,9 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
     var sendCategoryID: String?
     var dataManager = DataManager()
     
+    @IBOutlet weak var searchCategoryBar: UISearchBar!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
@@ -27,6 +30,8 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
         // MARK: - Get Categorys
     
     func getCategorysList(){
+        
+        print("someone call me")
         
         dataManager.loadCategorys { category in
             if category.count > 0 {
@@ -105,7 +110,6 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
             sendCategoryName = category.title!
             sendCategoryID = category.categoryID!
             
-            
             performSegue(withIdentifier: K.itemsSegue, sender: self)
         }
         
@@ -118,8 +122,35 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
         let destinationVC = segue.destination as! ItemsViewController
         
         if let getCategoryName = sendCategoryName,  let getCategoryID = sendCategoryID{
+            print(getCategoryName)
             destinationVC.selectedCategory = getCategoryName
             destinationVC.categoryID = getCategoryID
+        }
+    }
+}
+
+extension HomeTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        var filteredList: [Category] = []
+        
+        if let categorys = cat {
+            for category in categorys {
+                if category.title!.contains(searchBar.text!){
+                    filteredList.append(category)
+                }
+            }
+            
+            cat = filteredList
+            tableView.reloadData()
+            
+        }
+    }
+    
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0 {
+            getCategorysList()
         }
     }
 }
