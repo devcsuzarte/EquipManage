@@ -64,11 +64,14 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
             
         }
         
+        let actionDismiss = UIAlertAction(title: "Cancel", style: .destructive)
+        
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
             textField = alertTextField
         }
         
+        alert.addAction(actionDismiss)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
