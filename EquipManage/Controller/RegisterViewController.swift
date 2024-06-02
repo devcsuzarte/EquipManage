@@ -25,11 +25,24 @@ class RegisterViewController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     print(e.localizedDescription)
+                    self.alertWithError(error: e.localizedDescription)
                 } else {
-                    self.performSegue(withIdentifier: K.homeSegue, sender: LoginViewController.self)
+                    self.dismiss(animated: true)
                 }
             }
         }
+    }
+    
+    func alertWithError(error: String){
+        let alert = UIAlertController(title: "Register Failed", message: error, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Ok", style: .default) {(action) in
+            
+            
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
 

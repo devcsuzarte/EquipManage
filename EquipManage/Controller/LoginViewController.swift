@@ -25,10 +25,23 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
                 if let e = error {
                     print(e)
+                    self?.alertWithError(error: e.localizedDescription)
                 } else {
                     self!.performSegue(withIdentifier: K.homeSegue, sender: self)
                 }
             }
         }
+    }
+    
+    func alertWithError(error: String){
+        let alert = UIAlertController(title: "Login Failed", message: error, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Ok", style: .default) {(action) in
+            
+            
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }

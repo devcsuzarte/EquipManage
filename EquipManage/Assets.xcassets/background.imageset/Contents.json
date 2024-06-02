@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "ios_7_like_background_by_kyroapps_d6gucun.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "ios_7_like_background_by_kyroapps_d6gucun@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "ios_7_like_background_by_kyroapps_d6gucun@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

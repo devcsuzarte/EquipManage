@@ -31,8 +31,6 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
     
     func getCategorysList(){
         
-        print("someone call me")
-        
         dataManager.loadCategorys { category in
             if category.count > 0 {
                 self.cat = category
@@ -100,7 +98,7 @@ class HomeTableViewController: UITableViewController, DataManagerCategory {
             cell.detailTextLabel?.text = String(category.counter!)
         } else {
             cell.textLabel?.text = "No categorys"
-            cell.textLabel?.textColor = .systemGray6
+            cell.textLabel?.font = .systemFont(ofSize: 15.0, weight: .regular)
         }
         
         return cell
